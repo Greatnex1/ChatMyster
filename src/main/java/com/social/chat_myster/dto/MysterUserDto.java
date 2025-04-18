@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Builder
 public record MysterUserDto(
@@ -18,6 +19,7 @@ public record MysterUserDto(
         String phoneNumber,
         String username,
         String role,
-         LocalDateTime dateCreated
+         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+         ZonedDateTime dateCreated
 ) {
 }
