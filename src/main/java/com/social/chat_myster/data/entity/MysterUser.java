@@ -5,8 +5,8 @@ import com.social.chat_myster.data.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
-
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,6 +30,6 @@ public class MysterUser {
     private String myUsername;
     @Enumerated(EnumType.STRING)
     private Role role;
-    private LocalDateTime dateCreated;
+    private ZonedDateTime dateCreated;
 
 }
