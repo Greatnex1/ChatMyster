@@ -20,12 +20,12 @@ public class MysterUser {
     private String id;
     private String firstname;
     private String lastname;
-   @Column(unique= true)
     @Email
     private String email;
     private String password;
     private String phoneNumber;
     private String confirmPassword;
+    @Column(unique= true)
     private String username;
     private String myUsername;
     @Enumerated(EnumType.STRING)
