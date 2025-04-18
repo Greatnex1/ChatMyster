@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface MysterUserUseCase {
 MysterUserDto createMysterUser(SignUpDto registerUser) throws MysterUserException;
+    MysterUser loadUser(String username);
     MysterUser findUserByUsername (String userId) throws MysterUserException;
     List<MysterUserDto> findAllUsers();
 //    void updateUserProfile(String id, UpdateRequest updateRequest) throws MysterUserException;
