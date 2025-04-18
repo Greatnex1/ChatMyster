@@ -39,6 +39,7 @@ class MysterUserServiceTest {
                 .email("noah@email.com")
                 .firstname("Nouah")
                 .lastname("Akoni")
+                .username("noah")
                 .password("@Blessed05")
                 .phoneNumber("09087654321")
                 .confirmPassword("@Blessed05")
@@ -48,12 +49,28 @@ class MysterUserServiceTest {
 
     @Test
     void testThatUserCanRegisterOnMysterPlatform() {
-        when(mysterUserRepository.findByEmail(signUpDto.email())).thenReturn(Optional.empty());
+        when(mysterUserRepository.findByUsername(signUpDto.username())).thenReturn(Optional.empty());
        when(passwordEncoder.encode(signUpDto.password())).thenReturn("password is encoded");
        assertDoesNotThrow(() -> mysterUserService.createMysterUser(signUpDto));
        assertNotNull(signUpDto);
        assertThat(signUpDto.email()).isEqualTo("noah@email.com");
+        assertThat(signUpDto.username()).isEqualTo("noah");
+
+    }
+    @Test
+    void findUserById() {
     }
 
+    @Test
+    void findAllUsers() {
+    }
+
+    @Test
+    void findUserByEmail() {
+    }
+
+    @Test
+    void verifyUser() {
+    }
 
 }
