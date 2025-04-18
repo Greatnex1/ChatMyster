@@ -16,6 +16,8 @@ public record MysterUserDto(
         String lastname,
         String email,
         String phoneNumber,
-        String role
+        String username,
+        String role,
+         LocalDateTime dateCreated
 ) {
 }
