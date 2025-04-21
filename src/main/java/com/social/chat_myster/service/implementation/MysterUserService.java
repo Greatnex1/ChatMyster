@@ -89,8 +89,8 @@ private MysterUserDto buildMysterUserDto(MysterUser newUser){
     }
 
     @Override
-    public List<MysterUserDto> findAllUsers() {
-        return List.of();
+    public List<MysterUser> findAllUsers() {
+        return userRepository.findAll();
     }
 
 
