@@ -32,28 +32,9 @@ public class MysterUserService implements MysterUserUseCase {
 
         registerUser.validateSignUpData();
 
-        MysterUser newUser = MysterUser.builder()
-                .firstname(registerUser.firstname())
-                .lastname(registerUser.lastname())
-                .email(registerUser.email())
-                .username(registerUser.username())
-                .password(passwordEncoder.encode(registerUser.password()))
-                .phoneNumber(registerUser.phoneNumber())
-                .role(Role.valueOf(registerUser.role()))
-                .dateCreated(ZonedDateTime.now())
-                .build();
-     MysterUser saved =   userRepository.save(newUser);
-        log.info("A Myster User with username ->{}, and email->{}, registered successfully", saved.getUsername(), saved.getEmail());
-        return MysterUserDto.builder()
-                .id(newUser.getId())
-                .email(newUser.getEmail())
-                .firstname(newUser.getFirstname())
-                .lastname(newUser.getLastname())
-                .phoneNumber(newUser.getPhoneNumber())
-                .username(newUser.getUsername())
-                .role(String.valueOf(newUser.getRole()))
-                .dateCreated(ZonedDateTime.now())
-                .build();
+      MysterUser newUser = buildMysterNewUser(registerUser);
+
+      return buildMysterUserDto(newUser);
     }
 
     private void ensureUsernameIsUniqueAndPasswordMatches(SignUpDto registerUser) throws MysterUserException {
@@ -66,6 +47,34 @@ public class MysterUserService implements MysterUserUseCase {
             throw new IllegalArgumentException("Password does not match");
         }
     }
+
+    private MysterUser buildMysterNewUser(SignUpDto registerUser) throws MysterUserException {
+        MysterUser newUser = MysterUser.builder()
+                .firstname(registerUser.firstname())
+                .lastname(registerUser.lastname())
+                .email(registerUser.email())
+                .username(registerUser.username())
+                .password(passwordEncoder.encode(registerUser.password()))
+                .phoneNumber(registerUser.phoneNumber())
+                .role(Role.valueOf(registerUser.role()))
+                .dateCreated(ZonedDateTime.now())
+                .build();
+           userRepository.save(newUser);
+        log.info("A Myster User with username ->{}, and email->{}, registered successfully", newUser.getUsername(), newUser.getEmail());
+       return newUser;
+    }
+private MysterUserDto buildMysterUserDto(MysterUser newUser){
+            return MysterUserDto.builder()
+            .id(newUser.getId())
+            .email(newUser.getEmail())
+            .firstname(newUser.getFirstname())
+            .lastname(newUser.getLastname())
+            .phoneNumber(newUser.getPhoneNumber())
+            .username(newUser.getUsername())
+            .role(String.valueOf(newUser.getRole()))
+            .dateCreated(ZonedDateTime.now())
+            .build();
+}
 
     @Override
     public MysterUser findUserByUsername(String username) throws MysterUserException {
