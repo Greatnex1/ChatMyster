@@ -11,7 +11,7 @@ public interface MysterUserUseCase {
 MysterUserDto createMysterUser(SignUpDto registerUser) throws MysterUserException;
     MysterUser loadUser(String username);
     MysterUser findUserByUsername (String userId) throws MysterUserException;
-    List<MysterUserDto> findAllUsers();
+    List<MysterUser> findAllUsers();
 //    void updateUserProfile(String id, UpdateRequest updateRequest) throws MysterUserException;
     void verifyUser(String token) throws MysterUserException;
 }
