@@ -4,6 +4,7 @@ import com.social.chat_myster.data.entity.MysterUser;
 import com.social.chat_myster.data.enums.Role;
 import com.social.chat_myster.dto.MysterUserDto;
 import com.social.chat_myster.dto.SignUpDto;
+import com.social.chat_myster.dto.response.UserDetailResponse;
 import com.social.chat_myster.exception.MysterUserException;
 import com.social.chat_myster.repository.MysterUserRepository;
 import com.social.chat_myster.service.interfaces.MysterUserUseCase;
@@ -14,8 +15,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -89,14 +92,33 @@ private MysterUserDto buildMysterUserDto(MysterUser newUser){
     }
 
     @Override
+    public List<UserDetailResponse> getUsersDetails(Collection<String> userIds) {
+        List<MysterUser> users = userRepository.findAllById(userIds);
+        return users.stream()
+                .map(this::getUserDetail)
+                .collect(Collectors.toList());
+    }
+
+    private UserDetailResponse getUserDetail(MysterUser user) {
+        return UserDetailResponse.builder()
+                .id(user.getId())
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .firstname(user.getFirstname())
+                .lastname(user.getLastname())
+                .build();
+    }
+
+
+    @Override
     public List<MysterUser> findAllUsers() {
         return userRepository.findAll();
     }
 
 
-    @Override
-    public void verifyUser(String token) throws MysterUserException {
-
-    }
+//    @Override
+//    public void verifyUser(String token) throws MysterUserException {
+//
+//    }
 
 }
