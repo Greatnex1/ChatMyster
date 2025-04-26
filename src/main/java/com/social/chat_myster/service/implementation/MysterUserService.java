@@ -62,9 +62,9 @@ public class MysterUserService implements MysterUserUseCase {
                 .role(Role.valueOf(registerUser.role()))
                 .dateCreated(ZonedDateTime.now())
                 .build();
-           userRepository.save(newUser);
-        log.info("A Myster User with username ->{}, and email->{}, registered successfully", newUser.getUsername(), newUser.getEmail());
-       return newUser;
+        log.info("A Myster User with username {} registered successfully", newUser.getUsername());
+        userRepository.save(newUser);
+        return newUser;
     }
 private MysterUserDto buildMysterUserDto(MysterUser newUser){
             return MysterUserDto.builder()
