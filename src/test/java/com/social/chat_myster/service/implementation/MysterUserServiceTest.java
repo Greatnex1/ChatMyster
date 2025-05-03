@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -31,8 +32,9 @@ class MysterUserServiceTest {
     @InjectMocks
     private MysterUserService mysterUserService;
 
-    MysterUser mysterUser;
     SignUpDto signUpDto;
+
+    MysterUser mysterUser;
     @BeforeEach
     void setUp() {
         signUpDto = SignUpDto.builder()
@@ -57,20 +59,5 @@ class MysterUserServiceTest {
         assertThat(signUpDto.username()).isEqualTo("noah");
 
     }
-    @Test
-    void findUserById() {
-    }
 
-    @Test
-    void findAllUsers() {
-    }
-
-    @Test
-    void findUserByEmail() {
-    }
-
-    @Test
-    void verifyUser() {
-    }
-
-}
+   }
