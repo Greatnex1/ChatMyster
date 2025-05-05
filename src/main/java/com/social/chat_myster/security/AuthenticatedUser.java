@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.List;
 @AllArgsConstructor
 @Slf4j
+
 public class AuthenticatedUser implements UserDetails {
 
     private final MysterUser user;
