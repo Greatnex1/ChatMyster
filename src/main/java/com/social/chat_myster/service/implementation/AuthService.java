@@ -1,6 +1,7 @@
 package com.social.chat_myster.service.implementation;
 
 import com.social.chat_myster.data.entity.MysterUser;
+import com.social.chat_myster.data.entity.RefreshToken;
 import com.social.chat_myster.dto.LoginDto;
 import com.social.chat_myster.dto.response.AuthenticationResponse;
 import com.social.chat_myster.repository.MysterUserRepository;
@@ -25,6 +26,7 @@ public class AuthService implements AuthUseCase {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
     private final MysterUserRepository userRepository;
+    private final RefreshTokenService refreshTokenService;
 
     @Override
     public AuthenticationResponse authenticate(LoginDto request) {
@@ -45,7 +47,7 @@ public class AuthService implements AuthUseCase {
 
         AuthenticatedUser authenticatedUser = new AuthenticatedUser(user);
         String jwtToken = jwtService.generateToken(authenticatedUser);
-
+//RefreshToken refreshToken = refreshTokenService.createRefreshToken(authenticatedUser.getUserId());
         log.info("Authentication was successful for user: {}", username);
         return AuthenticationResponse.pass(jwtToken, authenticatedUser.getUserId());
     }
