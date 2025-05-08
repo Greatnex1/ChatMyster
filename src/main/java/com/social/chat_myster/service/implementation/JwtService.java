@@ -23,6 +23,9 @@ public class JwtService implements JwtUseCase {
    @Value("${application.security.jwt.secret-key}")
     private String SECRET_KEY;
 
+    @Value("${application.security.jwt.expiration}")
+    private long jwtExpiration;
+
     public String extractUsername(String token){
         return extractClaim(token, Claims::getSubject);
     }
@@ -45,7 +48,7 @@ public class JwtService implements JwtUseCase {
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 86_400_000))
+                .setExpiration(new Date(System.currentTimeMillis() + jwtExpiration))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
