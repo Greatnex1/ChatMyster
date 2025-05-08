@@ -29,9 +29,9 @@ public class DefaultUser implements CommandLineRunner {
                 .lastname("Brown")
                 .email("oliverbrown@gmail.com")
                 .username("Olive")
-                .password("BlessedLad05")
+                .password("@BlessedLad05")
                 .phoneNumber("09045678910")
-                .confirmPassword("BlessedLad05")
+                .confirmPassword("@BlessedLad05")
                 .role("USER")
                 .build();
         log.info("Login details for default user, Username: {} Password: {}", userRequest.username(), userRequest.password());
